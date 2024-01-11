@@ -10,6 +10,14 @@ export default function FormIMC(){
     const [pesoDesejado, setPesoDesejado] = useState('')
     const [atividade, setAtividade] = useState('')
 
+    console.log({
+        idade:idade,
+        peso:peso,
+        altura:altura,
+        pesoDesejado,
+        atividade:atividade
+    })
+
     const listaNiveisAtividade = [
         '',
         'Sedentário',
