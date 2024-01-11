@@ -1,0 +1,100 @@
+.formDados{
+    width: 80%;
+    height: 100vh;
+
+    padding: 0.5rem;
+
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: #fff;
+
+    border-radius: 5px;
+    border: 1px solid var(--verde2);
+}
+
+.tituloForm h2{
+    font-size: 2em;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.tituloForm p{
+    font-size: 1.1em;
+    text-align: center;
+    padding:0 1rem 1rem 1rem;
+}
+
+.tituloForm p b{
+    color: var(--verde2);
+}
+
+.formDados input[type="number"],
+.formDados input[type="radio"],
+.formDados select,
+.formDados button{
+    outline:0;
+    border:0;
+}
+
+.formDados input[type='number']{
+    width: 90%;
+
+    font-size: 1em;
+
+    margin: 0.5rem auto;
+    padding: 0.25rem;
+
+    border-bottom: 1px solid var(--verde1);
+}
+
+.formDados h3{
+    margin: 0 1rem;
+}
+
+.formDados .sexoInput{
+    display: flex;
+
+    align-items: center;
+
+    margin: 0.5em;
+}
+
+.formDados .sexoInput .sexo{
+    margin: 0 0 0 0.75rem;
+}
+
+.formDados .nivelAtividadeSelect{
+    width: 100%;
+    text-align: center;
+}
+
+.formDados .nivelAtividadeSelect select{
+    width: 90%;
+
+    margin:0.35rem auto 1rem auto;
+    padding: 0.25rem;
+
+    border:1px solid var(--verde1);
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 1.5em;
+}
+
+.formDados button{
+    width: 90%;
+
+    margin:0 auto;
+
+    font-size: 2em;
+
+    padding: 0.5rem;
+
+    border-radius: 5px;
+
+    background-color: var(--verde1);
+}

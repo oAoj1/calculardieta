@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=REM:wght@100;300;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'REM', Arial, Helvetica, sans-serif;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    appearance: textfield;
+}
+
+:root{
+    --verde0:#40ff6c;
+    --verde1:#03fc3d;
+    --verde2:#00781c;
+}

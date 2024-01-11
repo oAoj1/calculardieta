@@ -1,0 +1,9 @@
+.Home{
+    max-width: 500px;
+    min-height: 100vh;
+
+    margin: auto;
+    padding: 1rem 0;
+
+    background-color: var(--verde1);
+}
