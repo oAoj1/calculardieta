@@ -1,6 +1,6 @@
 .formDados{
     width: 80%;
-    height: 100vh;
+    height: 100%;
 
     padding: 0.5rem;
 
@@ -66,12 +66,14 @@
     margin: 0 0 0 0.75rem;
 }
 
-.formDados .nivelAtividadeSelect{
+.formDados .nivelAtividadeSelect,
+.formDados .objetivoSelect{
     width: 100%;
     text-align: center;
 }
 
-.formDados .nivelAtividadeSelect select{
+.formDados .nivelAtividadeSelect select,
+.formDados .objetivoSelect select{
     width: 90%;
 
     margin:0.35rem auto 1rem auto;
@@ -97,4 +99,6 @@
     border-radius: 5px;
 
     background-color: var(--verde1);
+
+    cursor: pointer;
 }

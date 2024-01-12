@@ -1,38 +1,87 @@
 import './formIMC.css'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useNavigate } from 'react-router-dom'
 
 export default function FormIMC(){
+    
+    const navigate = useNavigate()
 
-    const [idade, setIdade] = useState('')
     const [peso, setPeso] = useState('')
     const [altura, setAltura] = useState('')
-    const [pesoDesejado, setPesoDesejado] = useState('')
+    const [idade, setIdade] = useState('')
     const [atividade, setAtividade] = useState('')
+    const [sexo, setSexo] = useState<string | any>('')
+    const [objetivo, setObjetivo] = useState('')
 
-    console.log({
-        idade:idade,
-        peso:peso,
-        altura:altura,
-        pesoDesejado,
-        atividade:atividade
-    })
-
-    const listaNiveisAtividade = [
+    const listaFrequenciaAtividade = [
         '',
-        'Sedentário',
-        'Pouco ativo',
-        'Ativo',
+        'Leve',
+        'Moderado',
         'Muito ativo',
+        'Extremamente ativo',
     ]
 
     const sexos = [
         'Masculino',
         'Feminino'
+    ] 
+
+    const objetivos = [
+        '',
+        'Perder peso',
+        'Manter forma',
+        'Ganhar massa'
     ]
 
+    useEffect(() => {
+        const savedDataPeso = localStorage.getItem('savedDataPeso')
+        const savedDataAltura = localStorage.getItem('savedDataAltura')
+        const savedDataIdade = localStorage.getItem('savedDataIdade')
+        const savedDataAtividade = localStorage.getItem('savedDataAtividade')
+        const savedDataSexo = localStorage.getItem('savedDataSexo')
+        const savedDataObjetivo = localStorage.getItem('savedDataObjetivo')
+
+        if(savedDataPeso){
+            setPeso(savedDataPeso)
+        }
+        if(savedDataAltura){
+            setAltura(savedDataAltura)
+        }
+        if(savedDataIdade){
+            setIdade(savedDataIdade)
+        }
+        if(savedDataAtividade){
+            setAtividade(savedDataAtividade)
+        }
+        if(savedDataSexo){
+            setSexo(savedDataSexo)
+        }
+        if(savedDataObjetivo){
+            setObjetivo(savedDataObjetivo)
+        }
+
+    },[])
+
+    useEffect(() => {
+        localStorage.setItem('savedData', peso)
+        localStorage.setItem('savedData', altura)
+        localStorage.setItem('savedData', idade)
+        localStorage.setItem('savedData', atividade)
+        localStorage.setItem('savedData', sexo)
+        localStorage.setItem('savedData', objetivo)
+
+    },[peso,altura,idade,sexo,objetivo])
+
+    function calcular(){
+        navigate(`/resultado?pesoParam=${encodeURIComponent(peso)}&alturaParam=${encodeURIComponent(altura)}&idadeParam=${encodeURIComponent(idade)}&atividadeParam=${encodeURIComponent(atividade)}&sexoParam=${encodeURIComponent(sexo)}&objetivoParam=${encodeURIComponent(objetivo)}`)
+    }
+
     return(
-        <form className='formDados'>
+        <form 
+            className='formDados'
+            onSubmit={calcular}
+        >
             <div className="tituloForm">
                 <h2>Calcule IMC</h2>
 
@@ -43,61 +92,66 @@ export default function FormIMC(){
             </div>
 
             <input 
-                required
                 type="number" 
                 placeholder="Idade"
                 onChange={e => setIdade(e.target.value)}
             />
 
             <input 
-                required
                 type="number" 
                 placeholder="Peso (Em quilos - KG)"
                 onChange={e => setPeso(e.target.value)}
             />
 
             <input 
-                required
                 type="number" 
                 placeholder="Altura (Em Centímetros - CM)"
                 onChange={e => setAltura(e.target.value)}
             />
 
-            <input 
-                required
-                type="number" 
-                placeholder="Peso desejado (Em quilos - KG)"
-                onChange={e => setPesoDesejado(e.target.value)}
-            />
-            
             <h3>Qual é seu sexo?</h3>
+
             <div className="sexoInput">
                 {sexos.map(sexo => (
-                    <div className='sexo'>
+                    <div className='sexo' key={sexo}>
                         <input 
                             type='radio' 
                             name='sexo'
                             value={sexo}
+                            onClick={() => setSexo(sexo)}
                         />
                         <label>{sexo}</label>
                     </div>
                 ))}
             </div>
-            
 
             <h3>Qual é seu nível de atividade diária?</h3>
             <div className="nivelAtividadeSelect">
                 <select 
-                    onChange={e => setAtividade(e.target.value)}
                     required
+                    onChange={e => setAtividade(e.target.value)}
                 >
-                    {listaNiveisAtividade.map(nivel => (
+                    {listaFrequenciaAtividade.map(nivel => (
                         <option key={nivel}>
                             {nivel}
                         </option>
                     ))}
                 </select>
-            </div>
+            </div>  
+
+            <h3>Qual é seu objetivo?</h3>
+            <div className="objetivoSelect">
+                <select 
+                    required
+                    onChange={e => setObjetivo(e.target.value)}
+                >
+                    {objetivos.map(objetivo => (
+                        <option key={objetivo}>
+                            {objetivo}
+                        </option>
+                    ))}
+                </select>
+            </div>  
 
             <button>Calcular</button>
         </form>
