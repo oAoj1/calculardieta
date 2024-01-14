@@ -4,6 +4,16 @@ import { useLocation } from 'react-router-dom'
 
 import { useState, useEffect } from 'react'
 
+import { IoPersonSharp } from "react-icons/io5"
+import { IoIosMale } from "react-icons/io"
+import { IoIosFemale } from "react-icons/io"
+
+import { FaWeight } from "react-icons/fa"
+import { FaRunning } from "react-icons/fa"
+
+import { GiBodyHeight } from "react-icons/gi"
+import { GiFlagObjective } from "react-icons/gi"
+
 export default function Resultado(){
 
     const locationHook = useLocation()
@@ -21,7 +31,7 @@ export default function Resultado(){
     const [ingestaoAgua, setIngestaoAgua] = useState<string | number>('')
     const [ingestaoProteina, setIngestaoProteina] = useState<string | number>('')
     const [ingestaoCarboidrato, setIngestaoCarboidrato] = useState<string | number>('')
-    const [ingestaoGordura, setIngestaoGordura] = useState<string | number>('')
+    const [ingestaoGordura, setIngestaoGordura] = useState<string | number>('' || 0)
 
     useEffect(() => {
         const queryParams = new URLSearchParams(locationHook.search)
@@ -358,25 +368,75 @@ export default function Resultado(){
         const contaIngestaoGordura = contaPorcentagemGorduras / 9
         setIngestaoGordura((contaIngestaoGordura).toFixed(1))
 
-    },[locationHook.search])
-
+    },[locationHook.search,ingestaoGordura])
 
     return(
-        <div>
-            idade: {idade} <br />
-            peso: {peso} <br />
-            altura: {altura} <br />
-            sexo: {sexo} <br />
-            objetivo: {objetivo} <br /> 
-            nivel atividade: {atividade} <br /> <br />
+        <div className='resultado'>
+            <h1>Veja seus resultados!</h1>
 
-            imc: {imc} <br />
-            classificacao: {classificacao} <br />
-            ingestao de agua: {ingestaoAgua} <br />
-            ingestao de calorias: {ingestaoCaloria} <br />
-            ingestao proteinas: {ingestaoProteina} <br />
-            ingestao carboidratos: {ingestaoCarboidrato} <br />
-            ingestao gordura: {ingestaoGordura} <br /> 
+            <div className="dadosUsuario">
+                <div className="numeros">
+                    <h2> 
+                        <IoPersonSharp/> Idade <span>{idade} anos</span> 
+                    </h2>
+                    <h2> 
+                        <FaWeight /> Peso: <span>{peso} KG</span> 
+                    </h2>
+                    <h2>
+                        <GiBodyHeight /> Altura: <span>{altura} CM</span> 
+                    </h2>
+                </div>
+
+                
+                <div className="escrito">
+                    <h2>
+                        {sexo == 'Masculino' ? <IoIosMale /> :
+                        sexo == 'Feminino' ?  <IoIosFemale /> : ''}
+                        Sexo: <span>{sexo}</span>  
+                    </h2>
+                    <h2> 
+                        <GiFlagObjective/> Objetivo: <span>{objetivo}</span> 
+                    </h2>
+                    <h2> 
+                        <FaRunning/> Nível atividade: <span>{atividade}</span> 
+                    </h2> 
+                </div>
+                 
+            </div>
+
+            <div className='calculos'>
+                <div className="resultadoCalculos">
+                    <img src="/public/imcLogo.png" alt="imcIcone" />
+                    <h2> <span>IMC:</span> {imc}</h2>
+                    <h3>Classificação: {classificacao}</h3>
+                </div>
+
+                <div className="resultadoCalculos">
+                    <img src="/public/calorias.png" alt="caloriasIcone"/>
+                    <h2><span>Calorias:</span> {ingestaoCaloria}KCAL</h2>
+                </div>
+                
+                <div className="resultadoCalculos">
+                    <img src="/public/agua.png" alt="aguaIcone"/>
+                    <h2><span>Água:</span> {ingestaoAgua}Ml</h2>
+                </div>
+
+                <div className="resultadoCalculos">
+                    <img src="/public/proteina.png" alt="proteinaIcone"/>
+                    <h2><span>Proteínas:</span> {ingestaoProteina}g</h2>
+                </div>
+
+                <div className="resultadoCalculos">
+                    <img src="/public/carboidratos.png" alt="carboidratoIcone"/>
+                    <h2><span>Carboidratos:</span> {ingestaoCarboidrato}g</h2>
+                </div>
+
+                <div className="resultadoCalculos">
+                    <img src="/public/gordura.png" alt="gorduraIcone"/>
+                    <h2><span>Gorduras:</span> {ingestaoGordura}g</h2>
+                </div>
+            </div>
+
         </div>
     )
 }
